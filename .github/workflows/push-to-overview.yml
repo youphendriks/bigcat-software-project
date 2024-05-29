@@ -1,0 +1,49 @@
+name: Push project data to overview repo
+
+on: [push]
+
+jobs:
+  job_1:
+    name: Upload artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-db
+          path: db.json
+  job_2:
+    name: Change repo
+    needs: job_1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout overview repo
+        uses: actions/checkout@v4
+        with:
+          repository: youphendriks/bigcat-software
+          token: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+  job_3:
+    name: Download artifact
+    needs: job_2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: project-db
+  job_4:
+    name: Run python script
+    needs: job_3
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run python script
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - uses: BSFishy/pip-action@v1
+        with:
+          packages: |
+            numpy==1.26.4
+            pandas==2.2.2
+            py-markdown-table==0.4.0
+            tabulate==0.9.0
+      - run: python3 insert-artifact.py
