@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import json
-from py_markdown_table.markdown_table import markdown_table
 
 def openFiles(path):
     json_file = open(path, 'r', encoding='utf-8')
@@ -9,7 +8,7 @@ def openFiles(path):
     return output_name
 
 dfProject = openFiles("db.json")
-dfOverview = openFiles("docs/software.json")
+dfOverview = openFiles("script/docs/software.json")
 
 
 title = dfProject["title"]
