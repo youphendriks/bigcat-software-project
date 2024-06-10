@@ -3,7 +3,6 @@
 <!--End title-->
 <!--Statement-->
 ## **A Cytoscape app to connect to a Neo4j database and execute extensions of the Neo4j database. This app has been extended to query the shortest path for metabolic conversions.**
----
 <!--End statement-->
 <!--Description-->
 Minimum System Requirements (for CyNeo4j 2.x):
